@@ -1,0 +1,22 @@
+
+.searchForma {
+  width: 50%;
+  display: flex;
+  position: relative;
+}
+
+.searchForma .proveedor {
+  width: 50%;
+}
+
+.searchForma .locacion {
+ width: 50%;
+ position: relative;
+ margin-left: 10px;
+}
+
+.searchForma .btnanti {
+  margin-top: 28px;
+  position: relative;
+  margin-left: 6px;
+}

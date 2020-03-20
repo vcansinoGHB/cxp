@@ -1,0 +1,59 @@
+
+.ancho {
+  width: 100%;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+.searchForm2 {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+
+.searchForm2 .concepto {
+  margin-right: 2%;
+  position: relative;
+}
+
+.searchForm2 .fecha {
+  margin-right: 3%;
+  position: relative;
+  width: 120px;
+}
+
+.searchForm2 .banco {
+  margin-right: 2%;
+  position: relative;
+}
+
+.searchForm2 .cheque {
+  
+}
+.searchForma {
+    width: 50%;
+    display: flex;
+    position: relative;
+  }
+  
+  .searchForma .proveedor {
+    width: 50%;
+  }
+  
+  .searchForma .locacion {
+   width: 50%;
+   position: relative;
+   margin-left: 10px;
+  }
+  
+  .searchForma .btnanti {
+    margin-top: 28px;
+    position: relative;
+    margin-left: 6px;
+  }

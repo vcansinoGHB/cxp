@@ -1,0 +1,53 @@
+<div class="login-page" style="min-height: 512.8px;">
+
+ <div class="login-box">
+    <div class="login-logo">
+      <b>Admin</b>CXP
+    </div>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">            
+         <div *ngIf="errores" class="alert alert-danger" role="alert">
+           El usuario no es válido
+         </div>           
+         <p class="login-box-msg">Seleccione la empresa</p>
+         <form [formGroup]="frmLogin" (ngSubmit)="Login()">
+          <div class="input-group mb-3">
+             <select id="empresa" class="form-control form-control-sm" formControlName="empresaid" id="empresaid">
+                <option value="tmx">Translamex</option>
+                <option value="estragui">Estragui</option>
+                <option value="trx">TRX</option>
+             </select>
+          </div>
+          <p class="login-box-msg">Registro para iniciar sesión</p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control form-control-sm" placeholder="Usuario" formControlName="usuario" id="usuario">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control form-control-sm" placeholder="Password" formControlName="clave" id="clave">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+             <div class="col-4 col-sm-12 col-md-12">
+              <button class="btn btn-primary btn-block btn-sm" [disabled]="!frmLogin.valid">               
+                Aceptar                
+              </button>
+         </div>
+          </div>
+        </form>
+  
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+ </div>
+
+</div>

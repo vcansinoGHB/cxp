@@ -1,0 +1,252 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6"><h1>{{sectionName}}</h1></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                  <a [routerLink]="['/home']">Home</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a [routerLink]="['/home/listproveedor']">Proveedores</a>
+            </li>
+              <li class="breadcrumb-item active">{{sectionName}}</li>
+            </ol>
+          </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <section class="container">     
+    <div class="row">
+      <div class="col-12 col-md-12 col-sm-12" *ngIf="strError !== ''">
+        <div class="alert alert-danger" role="alert">
+          {{strError}}
+        </div>
+      </div>      
+      <div class="col-sm-4">
+        
+        <div class="card card-secondary card-outline">
+          <div class="card-header">
+           * Datos requeridos  
+          </div>
+          <div class="card-body">
+            <form [formGroup]="frmProveedor" (ngSubmit)="Submit()">
+               <div class="form-group">
+                 <label for="nombre">*<strong>Nombre</strong></label>
+                 <input type="text" 
+                        class="form-control form-control-sm" 
+                        placeholder="Nombre" 
+                        formControlName="nombre" 
+                        id="nombre" required />            
+               </div>
+               <div class="form-group">
+                <label for="nombrecomercial">*<strong>Nombre Comercial</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Nombre Comercial" 
+                       formControlName="nombrecomercial" 
+                       id="nombrecomercial"  />            
+              </div>
+              <div class="form-group">
+                <label for="rfc">*<strong>RFC</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="RFC" 
+                       formControlName="rfc" 
+                       id="rfc"  />            
+              </div> 
+              <div class="form-group">
+                <label for="razonsocial"><strong>Razón Social</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Razón Social" 
+                       formControlName="razonsocial" 
+                       id="razonsocial"  />            
+              </div>  
+              <div class="form-group">
+                <label for="telefonos"><strong>Teléfonos</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Teléfonos" 
+                       formControlName="telefonos" 
+                       id="telefonos"  />            
+              </div>  
+              <div class="form-group">
+                <label for="telefonoAC"><strong>Teléfono Atención a Clientes</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Teléfono Atención a Clientes" 
+                       formControlName="telefonoAC" 
+                       id="telefonoAC"  />            
+              </div>
+              <div class="form-group">
+                <label for="registroimp"><strong>Registro Impuestos</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Registro Impuestos" 
+                       formControlName="registroimp" 
+                       id="registroimp" />            
+              </div>
+              <div class="form-group">
+                <label for="email"><strong>Email</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Email" 
+                       formControlName="email" 
+                       id="email" />            
+              </div> 
+              <div class="form-group">
+                <label for="emailfacturacion"><strong>Email Facturación</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Email Facturación" 
+                       formControlName="emailfacturacion" 
+                       id="emailfacturacion" />            
+              </div>
+              <div class="form-group">
+                <label for="emailatencion"><strong>Email Atención a Clientes</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Email Atención a Clientes" 
+                       formControlName="emailatencion" 
+                       id="emailatencion" />            
+              </div>    
+              <div class="form-group">
+                <label for="ciudad"><strong>Ciudad</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Ciudad" 
+                       formControlName="ciudad" 
+                       id="ciudad" />            
+              </div>
+              <div class="form-group">
+                <label for="cp"><strong>CP</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="cp" 
+                       formControlName="cp" 
+                       id="cp" />            
+              </div>
+              <div class="form-group">
+                <label for="representante"><strong>Representante</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="representante" 
+                       formControlName="representante" 
+                       id="representante" />            
+              </div>
+              <div class="form-group">
+                <label for="diascredito">*<strong>Días Crédito</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Días Crédito" 
+                       formControlName="diascredito" 
+                       id="diascredito" />            
+              </div>  
+              <div class="form-group">
+                <label for="limitecredito">*<strong>Límite Crédito</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Límite Crédito" 
+                       formControlName="limitecredito" 
+                       id="limitecredito" />            
+              </div>                                                                                                                                                                                    
+              <div class="form-group">
+                <label for="activo"><strong>Activo</strong></label>
+                       <select id="activo" 
+                               class="form-control form-control-sm" 
+                               formControlName="activo" id="activo">
+                        <option value="1">Activo</option>
+                        <option value="0">No activo</option>                        
+                     </select>         
+              </div>
+              <div class="form-group">
+                <label for="cuenta1"><strong>Cuenta 1</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Cuenta 1" 
+                       formControlName="cuenta1" 
+                       id="cuenta1" />            
+              </div> 
+              <div class="form-group">
+                <label for="clabe1"><strong>Clabe 1</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Clabe 1" 
+                       formControlName="clabe1" 
+                       id="clabe1" />            
+              </div>  
+              <div class="form-group">
+                <label for="divisa1"><strong>Divisa 1</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Divisa 1" 
+                       formControlName="divisa1" 
+                       id="divisa1" />            
+              </div>   
+              <div class="form-group">
+                <label for="banco1"><strong>Banco 1</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Banco 1" 
+                       formControlName="banco1" 
+                       id="banco1" />            
+              </div>  
+              <div class="form-group">
+                <label for="referencia1"><strong>Referencia 1</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Referencia 1" 
+                       formControlName="referencia1" 
+                       id="referencia1" />            
+              </div> 
+              <div class="form-group">
+                <label for="cuenta2"><strong>Cuenta 2</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Cuenta 2" 
+                       formControlName="cuenta2" 
+                       id="cuenta2" />            
+              </div> 
+              <div class="form-group">
+                <label for="clabe2"><strong>Clabe 2</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Clabe 2" 
+                       formControlName="clabe2" 
+                       id="clabe2" />            
+              </div>  
+              <div class="form-group">
+                <label for="divisa2"><strong>Divisa 2</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Divisa 2" 
+                       formControlName="divisa2" 
+                       id="divisa2" />            
+              </div>   
+              <div class="form-group">
+                <label for="banco2"><strong>Banco 2</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Banco 2" 
+                       formControlName="banco2" 
+                       id="banco2" />            
+              </div>  
+              <div class="form-group">
+                <label for="referencia2"><strong>Referencia 2</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Referencia 2" 
+                       formControlName="referencia2" 
+                       id="referencia2" />            
+              </div>                                                                                  
+              <button class="btn btn-danger btn-sm float-left" type="button" (click)="Cancelar()">Cancelar</button>
+              <button class="btn btn-info btn-sm float-right" type="submit" [disabled]="!frmProveedor.valid">Aceptar</button>
+           </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,184 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6"><h1>Pagos</h1></div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+              <li class="breadcrumb-item active">Pagos</li>
+            </ol>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="container-fluid">
+
+    <form [formGroup]="frmPagos" (ngSubmit)="Pagar($event)" novalidate>
+    <div class="card card-primary card-outline">      
+      <div class="card-header">
+         <div class="searchForma">
+            <div class="proveedor">
+                <div class="form-group">
+                   <label for="locacion">Proveedor</label>    
+                   <select class="form-control form-control-sm" 
+                           formControlName="proveedorid" 
+                           id="proveedorid" [ngClass]="{ 'is-invalid': submitted && f.proveedorid.errors }">
+                    <option value="">-- Seleccione proveedor --</option>
+                    <option *ngFor="let item of proveedor; let i = index" [value]="proveedor[i].proveedor_id">
+                     {{proveedor[i].proveedor_nombre}}
+                   </option> 
+                  </select> 
+                  <div *ngIf="submitted && f.proveedorid.errors" class="invalid-feedback">
+                    <div *ngIf="f.proveedorid.errors.required">El proveedor es requerido.</div>
+                </div>            
+                </div>
+            </div>
+            <div class="locacion">
+              <div class="form-group">
+                <label for="locacion">Locación</label>
+                <select class="form-control form-control-sm" 
+                        id="locacionid" 
+                        formControlName="locacionid" [ngClass]="{'is-invalid':submitted && f.locacionid.errors }">
+                  <option value="">-- Seleccione la locación --</option>
+                  <option *ngFor="let item of locacion; let i = index" [value]="locacion[i].locacion_id">
+                          {{locacion[i].locacion_name}}
+                  </option> 
+                </select>                
+                <div *ngIf="submitted && f.locacionid.errors" class="invalid-feedback">
+                    <div *ngIf="f.locacionid.errors.required">La locación es requerida.</div>
+                </div>  
+              </div>
+            </div>
+          </div>
+          <div class="searchForm2">
+            <div class="concepto">
+              <div class="form-group">
+                 <label for="locacion">Concepto</label>
+                 <input type="text" class="form-control form-control-sm" 
+                        placeholder="Concepto" 
+                        formControlName="concepto" 
+                        id="concepto" [ngClass]="{ 'is-invalid': submitted && f.concepto.errors }" />
+                  <div *ngIf="submitted && f.concepto.errors" class="invalid-feedback">
+                    <div *ngIf="f.concepto.errors.required">El concepto es requerido.</div>
+                  </div>
+              </div>
+            </div>
+            <div class="concepto">
+              <div class="form-group">
+                 <label for="locacion">Cheque</label>
+                 <input type="text" class="form-control form-control-sm" 
+                        placeholder="Cheque" 
+                        formControlName="cheque" 
+                        id="cheque" [ngClass]="{'is-invalid':submitted && f.cheque.errors}"/>
+                  <div *ngIf="submitted && f.cheque.errors" class="invalid-feedback">
+                      <div *ngIf="f.cheque.errors.required">El cheque es requerido.</div>
+                 </div>
+              </div>
+            </div>
+            <div class="fecha">
+              <div class="form-group">
+                 <label for="fecha">Fecha</label> 
+                 <div class="input-group">               
+                     <input type="text" ngbDatepicker #d="ngbDatepicker" 
+                            class="form-control form-control-sm"
+                            id="fecha" 
+                            formControlName="fecha"
+                            size="10" 
+                            [ngClass]="{'is-invalid':submitted && f.fecha.errors}" />
+                     <button (click)="d.toggle()" class="btn btn-outline-secondary btn-sm" id="btnfecha" name="btnfecha"><i class="fa fa-calendar"></i></button>
+                 
+                 <div *ngIf="submitted && f.fecha.errors" class="invalid-feedback">
+                   <div *ngIf="f.fecha.errors.required">La fecha es requerida.</div>
+                 </div>
+                </div>
+              </div>
+            </div>
+            <div class="banco">
+              <div class="form-group">
+                 <label for="banco">Cuenta Bancaria</label>
+                 <select class="form-control form-control-sm" id="banco" formControlName="banco" [ngClass]="{ 'is-invalid': submitted && f.banco.errors }">
+                    <option value="">-- Seleccione cuenta bancaria --</option>
+                    <option *ngFor="let item of listaCuenta; let i = index" [value]="listaCuenta[i].cuenta_id">
+                      {{listaCuenta[i].banco_name}} - {{listaCuenta[i].cuenta_numero}} - {{listaCuenta[i].cuenta_moneda}}
+                    </option> 
+                 </select>
+                 <div *ngIf="submitted && f.banco.errors" class="invalid-feedback">
+                  <div *ngIf="f.banco.errors.required">La cuenta bancaria es requerida.</div>
+                </div> 
+              </div>
+            </div>            
+          </div>
+      </div>    
+      <div class="card-body">
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 ancho">
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change) = "$event ? masterToggle() : null"
+                              [checked] = "selection.hasValue() && isAllSelected()"
+                              [indeterminate] = "selection.hasValue() && !isAllSelected()"
+                              [aria-label] = "checkboxLabel()">
+                </mat-checkbox>
+              </th>              
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)"
+                              [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </td>
+              </ng-container>
+                
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element">  </td>
+              </ng-container>
+                
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                 <th mat-header-cell *matHeaderCellDef>Folio</th>
+                 <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+                
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef>Fecha</th>
+                <td mat-cell *matCellDef="let element">{{element.weight}} </td>
+              </ng-container>
+                
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef>Monto</th>
+                <td mat-cell *matCellDef="let element">{{element.symbol}}</td>
+              </ng-container>
+              <ng-container matColumnDef="moneda">
+                     <th mat-header-cell *matHeaderCellDef>Moneda</th>
+                     <td mat-cell *matCellDef="let element">{{element.moneda}}</td>
+              </ng-container>
+              <ng-container matColumnDef="concepto">
+                <th mat-header-cell *matHeaderCellDef>Concepto</th>
+                <td mat-cell *matCellDef="let element">{{element.concepto}}</td>
+              </ng-container>                  
+              <ng-container matColumnDef="fechavencimiento">
+                <th mat-header-cell *matHeaderCellDef>Fecha Vencimiento</th>
+                <td mat-cell *matCellDef="let element">{{element.fechavencimiento}}</td>
+              </ng-container>                                                                      
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+                </tr>
+              </table>
+      </div>
+      <div class="card-footer">   
+        <button type="submit" 
+                class="btn btn-info btn-sm float-right" 
+                id="entrar" 
+                name="entrar">Realizar Pago</button>       
+      </div>
+        
+  </div>
+    </form>
+  </div>
+</section>

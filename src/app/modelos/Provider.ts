@@ -1,0 +1,31 @@
+export class Provider {
+    proveedor_id:number;
+    proveedor_nombre:string;
+    proveedor_nombreComercial:string;
+    proveedor_rfc:string;
+    proveedor_razonsocial:string;
+    proveedor_tels:string;
+    proveedor_aclientes:string;
+    proveedor_telac:string;
+    proveedor_emailaclientes:string;	
+    proveedor_emailfacturacion:string;
+    proveedor_activo:number;
+    proveedor_cp:string;	
+    proveedor_registroimptos:string;	
+    proveedor_ciudad:string;	
+    proveedor_representante:string;	
+    proveedor_diascredito:number;
+    proveedor_limitecredito:number
+    proveedor_email:string;	   
+    proveedor_empresaID:number;
+    proveedor_cuenta:string;
+    proveedor_clabe:string;
+    proveedor_divisa:string;
+    proveedor_banco:string;
+    proveedor_referencia:string;
+    proveedor_cuenta1:string;
+    proveedor_clabe1:string;
+    proveedor_divisa1:string;
+    proveedor_banco1:string;
+    proveedor_referencia1:string	
+}

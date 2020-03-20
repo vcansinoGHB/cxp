@@ -1,0 +1,110 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6"><h1>Proveedores</h1></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+              <li class="breadcrumb-item active">Proveedores</li>
+            </ol>
+          </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  
+  <section class="content">
+    <div class="row">
+  
+      <div class="container-fluid">
+      <div class="col-md-4">    
+         <div class="card card-secondary card-outline">
+           <div class="card-header">
+            <h3 class="card-title">Búsqueda</h3>   
+           </div>
+           <div class="card-body">
+            <form [formGroup]="frmProveedor" (ngSubmit)="Submit()">
+               <div class="input-group mb-3">
+                 <input type="text" 
+                        class="form-control form-control-sm" 
+                        placeholder="Nombre" 
+                        formControlName="nombre" 
+                        id="nombre">            
+                 </div>
+                 <div class="input-group mb-3">
+                    <input type="text" 
+                           class="form-control form-control-sm" 
+                           placeholder="Razón Social" 
+                           formControlName="nombrecomer" 
+                           id="nombrecomer">            
+                    </div>
+                 <button class="btn btn-success btn-sm float-right" 
+                         type="submit">Buscar</button>
+            </form>
+           </div>
+         </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+      <div class="card card-primary card-outline">
+        <div class="card-header"> 
+             <div class="titulocard">
+               <div class="itemlist" *ngFor="let prov of proveedorLista">
+                    Lista de proveedores - Total {{ prov.totalResultados }}
+                </div> 
+                <!--
+                <div class="itemnvo">
+                  <a [routerLink]="['/home/nproveedor']" alt="Nuevo Proveedor">
+                  Nuevo Proveedor
+                  </a>
+                </div>-->
+             </div>
+        </div>
+        <div class="card-body"> 
+          <table class="table table-bordered table-hover table-sm">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>RFC</th>             
+                <th>Razón Social</th>
+                <th>Activo</th>
+                <th>Locación</th>
+                <th></th>
+              </tr>
+            </thead>
+           <tbody *ngFor="let prov of proveedorLista">
+              <tr *ngFor="let item of prov.providerList">
+                <td>{{item.proveedor_nombre}}</td>
+                <td>{{item.proveedor_rfc}}</td>
+                <td>{{item.proveedor_razonsocial}}</td>
+                <td>{{item.proveedor_activo === 1 ? 'Sí' : 'No'}}</td>  
+                <td align="center">
+                  <i class="fa fa-map-marker"></i>                  
+                </td>              
+                <td align="center">
+                  <a [routerLink]="['/home/eproveedor/' + item.proveedor_id ]" title="Editar Proveedor">
+                    <i class="fa fa-edit"></i>
+                  </a>                  
+                </td>
+              </tr>                
+            </tbody>
+            </table>
+        </div>
+
+        <div class="card-footer clearfix" *ngFor="let prov of proveedorLista">
+          <ul class="pagination pagination-sm m-0 float-right">
+           <!-- <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>-->
+           
+           <li class="page-item" *ngFor="let item of prov.paginas.pages">
+              <a class="page-link" (click)="Paginasiguiente(item)" [routerLink]="['/home/listproveedor']" [queryParams]="{ pagina: item }">{{item}}</a>
+           </li>
+         
+            <!--<li class="page-item"><a class="page-link" href="#">&raquo;</a></li>-->
+          </ul>
+        </div>
+
+      </div>
+  </div>
+</section>
+  
+

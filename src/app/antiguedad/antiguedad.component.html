@@ -1,0 +1,96 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Antiguedad de Saldos</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+            <li class="breadcrumb-item active">Antiguedad de Saldos</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="searchForma">
+            <div class="proveedor">
+             <div class="form-group">
+                <label for="locacion">Proveedor</label>
+                   <select class="form-control form-control-sm" formControlName="proveedorid" id="proveedorid">
+                     <option value="">-- Seleccione proveedor --</option>
+                     <option *ngFor="let item of proveedor; let i = index" [value]="proveedor[i].proveedor_id">
+                      {{proveedor[i].proveedor_nombre}}
+                    </option> 
+                   </select>
+                </div>
+             </div>
+            <div class="locacion">
+                <div class="form-group">
+                    <label for="locacion">Locación</label>
+                    <select class="form-control form-control-sm" id="locacionid" formControlName="locacionid">
+                        <option value="">-- Seleccione la locación --</option>
+                        <option *ngFor="let item of locacion; let i = index" [value]="locacion[i].locacion_id">
+                          {{locacion[i].locacion_name}}
+                        </option> 
+                    </select>
+                </div>
+            </div>
+            <div class="btnanti">
+                 <button class="btn btn-success btn-sm" type="submit">Buscar</button>
+            </div>
+            </div>
+           </form>
+        </div> <!-- /.card-body -->
+        <div class="card-body">          
+          
+            <div *ngFor="let saldo of saldosAnt">
+              <strong>Proveedor ({{saldo.proveedor_nombre}}</strong> <br>
+               <span> Días de crédito: {{saldo.proveedor_diascredito}}</span>                 
+            </div>
+
+            <table class="table table-bordered table-sm table-striped">
+              <thead>
+                <tr>
+                  <th align="center">Folio</th>
+                  <th>Fecha</th>
+                  <th>Vencim.</th>
+                  <th>Concepto</th>
+                  <th>Días</th>
+                  <th>91 días ó más</th>
+                  <th>61-90 días</th>
+                  <th>31-60 días</th>
+                  <th>1-30 días</th>
+                  <th>No vencido</th>
+                  <th>Saldo</th>
+                  <th>Moneda</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let saldo of saldosAnt">
+                <tr *ngFor="let item of saldo.movimiento">
+                  <td>{{item.folio}}</td>
+                  <td>{{item.fechalabel}}</td>
+                  <td>{{item.vencimientolabel}}</td>
+                  <td>{{item.concepto}}</td>
+                  <td>{{item.dias}}</td>
+                  <td>{{ item.periodo91 > 0 ? (item.periodo91 | currency) : ''  }}</td>
+                  <td>{{item.periodo61 > 0 ? (item.periodo61 | currency) : '' }}</td>
+                  <td>{{item.periodo31 > 0 ? (item.periodo31 | currency) : '' }}</td>
+                  <td>{{item.periodo1 > 0 ? (item.periodo1 | currency): '' }}</td>
+                  <td>{{item.novencido > 0 ? (item.novencido | currency) : ''}}</td>
+                  <td>{{item.saldo | currency}}</td>
+                  <td>{{item.moneda}}</td>
+                </tr>                
+              </tbody>
+            </table>
+        
+        </div><!-- /.card-body -->
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>

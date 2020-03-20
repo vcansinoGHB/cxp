@@ -1,0 +1,84 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6"><h1>Cuentas Bancarias</h1></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a [routerLink]="['/home']">Home</a></li>
+              <li class="breadcrumb-item active">Cuentas Bancarias</li>
+            </ol>
+          </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  
+  <section class="content">
+    <div class="row">
+  
+      <div class="container-fluid">
+      <div class="col-md-4">    
+         <div class="card card-secondary card-outline">
+           <div class="card-header">
+            <h3 class="card-title">Búsqueda</h3>   
+           </div>
+           <div class="card-body">
+            <form [formGroup]="frmSearch" (ngSubmit)="Submit()">
+               <div class="input-group mb-3">
+                 <input type="text" 
+                        class="form-control form-control-sm" 
+                        placeholder="Cuenta Bancaria" 
+                        formControlName="cuenta" 
+                        id="cuenta">            
+                 </div>
+                 <button class="btn btn-success btn-sm float-right" 
+                         type="submit">Buscar</button>
+            </form>
+           </div>
+         </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+      <div class="card card-primary card-outline">
+        <div class="card-header"> 
+             <div class="titulocard">
+               <div class="itemlist">Lista de cuentas</div> 
+                <div class="itemnvo">
+                  <a [routerLink]="['/home/nCuenta']" alt="Nueva Cuenta">
+                  Nueva Cuenta
+                  </a>
+                </div>
+             </div>
+        </div>
+        <div class="card-body"> 
+          <table class="table table-bordered table-hover table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cuenta Bancaria</th>
+                <th>Moneda</th>
+                <th>Banco</th>
+                <th>Activo</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let cuen of listaCuenta">
+              <tr *ngFor="let item of cuen.cuentaList">
+                <td>{{item.cuenta_id}}</td>
+                <td>{{item.cuenta_numero}}</td>
+                <td>{{item.cuenta_moneda}}</td>
+                <td>{{item.banco_name}}</td>
+                <td>{{item.cuenta_activo=== 1 ? 'Sí' : 'No'}}</td>                
+                <td align="center">
+                   <a [routerLink]="['/home/eCuenta/' + item.cuenta_id ]" alt="Editar Cuenta">
+                    <i class="fa fa-edit"></i>
+                   </a>                  
+                </td>
+              </tr>                
+            </tbody> 
+            </table>
+        </div>
+      </div>
+  </div>
+</section>
+  

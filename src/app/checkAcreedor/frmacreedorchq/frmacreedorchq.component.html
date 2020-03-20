@@ -1,0 +1,110 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+          <div class="col-sm-6"><h1>{{sectionName}}</h1></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">
+                  <a [routerLink]="['/home']">Home</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a [routerLink]="['/home/listchqacr']">Cheque Acreedor</a>
+            </li>
+              <li class="breadcrumb-item active">{{sectionName}}</li>
+            </ol>
+          </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <section class="container">     
+    <div class="row">
+      <div class="col-12 col-md-12 col-sm-12" *ngIf="strError !== ''">
+        <div class="alert alert-danger" role="alert">
+          {{strError}}
+        </div>
+      </div>      
+      <div class="col-sm-4">
+        
+        <div class="card card-secondary card-outline">
+          <div class="card-header">
+           * Datos requeridos  
+          </div>
+          <div class="card-body">
+            <form [formGroup]="frmCheque" (ngSubmit)="Submit()">
+             <div class="form-group">
+                 <label for="cheque">*<strong>Cheque</strong></label>
+                 <input type="text" 
+                        class="form-control form-control-sm" 
+                        placeholder="Cheque" 
+                        formControlName="cheque" 
+                        id="cheque" required />            
+              </div>
+              <div class="form-group">
+                <label for="concepto">*<strong>Concepto</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Concepto" 
+                       formControlName="concepto" 
+                       id="concepto" required />            
+             </div>
+             <div class="form-group">
+                <label for="fecha">*<strong>Fecha</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="" 
+                       formControlName="fecha" 
+                       id="fecha" />            
+             </div>
+             <div class="form-group">
+                <label for="importe">*<strong>Importe</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Importe" 
+                       formControlName="importe" 
+                       id="importe" />            
+             </div>                            
+             <div class="form-group">
+                <label for="moneda">*<strong>Moneda</strong></label>
+                    <select id="moneda" 
+                               class="form-control form-control-sm" 
+                               formControlName="moneda" id="moneda" required>       
+                      <option value="MXN">MXN</option>
+                      <option value="USD">USD</option>                        
+                    </select>         
+             </div>
+             <div class="form-group">
+                <label for="tc"><strong>Tipo Cambio</strong></label>
+                <input type="text" 
+                       class="form-control form-control-sm" 
+                       placeholder="Tipo Cambio" 
+                       formControlName="tc" 
+                       id="tc" />            
+             </div> 
+             <div class="form-group">
+                 <label for="cuenta">*<strong>Cuenta Bancaria</strong></label>
+                 <select id="cuenta" class="form-control form-control-sm" formControlName="cuenta" id="cuenta">
+                   <option value=""> Seleccione cuenta </option>                        
+                   <option *ngFor="let item of cuentabancaria; let i = index" [value]="cuentabancaria[i].cuenta_id">
+                    {{cuentabancaria[i].cuenta_numero}} - {{cuentabancaria[i].cuenta_banco}} - {{cuentabancaria[i].cuenta_moneda}}
+                   </option>                   
+                </select>            
+            </div> 
+            <div class="form-group">
+              <label for="acreedor">*<strong>Acreedor</strong></label>
+              <select class="form-control form-control-sm" formControlName="acreedor" id="acreedor">
+                <option value="">Seleccione acreedor</option>                        
+                <option *ngFor="let item of acreedoresLista; let i = index" [value]="acreedoresLista[i].acreedor_id">
+                  {{acreedoresLista[i].acreedor_nombre}}
+                </option>                    
+              </select>            
+            </div>                           
+             <button class="btn btn-danger btn-sm float-left" type="button" (click)="Cancelar()">Cancelar</button>
+             <button class="btn btn-info btn-sm float-right" type="submit" [disabled]="!frmCheque.valid">Aceptar</button>
+           </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
